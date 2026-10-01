@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="AI-powered freshwater health screening for OneAquaHealth.">
+    <title>OneAquaHealth | Water intelligence</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  </head>
+  <body>
+    <header class="site-header"><a class="brand" href="#top"><span>◈</span> OneAquaHealth</a><nav><a href="#check">Water check</a><a href="#insights">Insights</a><a href="#guide">How to read it</a><a href="#action">Community action</a></nav></header>
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">IEEE Global Hackathon 2026</p>
+          <h1>Know your water.<br>Protect your community.</h1>
+          <p>Turn a field sample into a clear, AI-powered freshwater health insight.</p>
+          <a class="button light" href="#check">Assess a sample <span>→</span></a>
+        </div>
+        <div class="hero-waves" aria-hidden="true"><span></span><span></span><span></span></div>
+      </section>
+      <section class="metrics" aria-label="Project statistics">
+        <article><span>Monitoring stations</span><strong>{{ overview.stations }}</strong></article>
+        <article><span>Reference samples</span><strong>{{ overview.samples }}</strong></article>
+        <article><span>Healthy samples</span><strong>{{ overview.healthy_share }}%</strong></article>
+        <article><span>Community checks</span><strong>{{ overview.checks }}</strong></article>
+      </section>
+      <section class="content-grid" id="check">
+        <div>
+          <p class="eyebrow teal">AI WATER CHECK</p>
+          <h2>Assess a water sample</h2>
+          <p class="lead">Enter measurements from a calibrated field kit. The model evaluates their combined impact, not one metric in isolation.</p>
+          <form id="prediction-form">
+            <div class="form-grid">
+              <label>Dissolved oxygen <small>mg/L</small><input name="DO" type="number" value="8.5" min="0" max="22.6" step="0.1" required></label>
+              <label>Temperature <small>°C</small><input name="Temperature" type="number" value="18" min="-0.1" max="34.5" step="0.1" required></label>
+              <label>pH<input name="pH" type="number" value="7.5" min="4.9" max="9.2" step="0.01" required></label>
+              <label>Nitrate-N <small>mg/L</small><input name="Nitrate" type="number" value="1" min="0" max="40.04" step="0.01" required></label>
+              <label>Total phosphorus <small>mg/L</small><input name="Phosphorus" type="number" value="0" min="0" max="10.54" step="0.001" required></label>
+            </div>
+            <button class="button" type="submit">Analyze water quality <span>→</span></button>
+          </form>
+          <p class="range-note">Use field-kit values inside the GEMStat training ranges. This is an early-warning tool, not a laboratory certificate.</p>
+        </div>
+        <aside class="water-stage" id="water-stage">
+          <div class="vial" aria-hidden="true">
+            <div class="vial-rim"></div>
+            <div class="vial-glass">
+              <div class="water">
+                <div class="wave one"></div>
+                <div class="wave two"></div>
+                <span class="bubble"></span><span class="bubble"></span><span class="bubble"></span>
+              </div>
+            </div>
+          </div>
+          <p class="vial-caption" id="vial-caption">Waiting for a sample</p>
+          <p class="vial-hint">Watch the water respond as the model reads your five signals.</p>
+        </aside>
+      </section>
+      <section id="result" class="result hidden" aria-live="polite"></section>
+      <section id="insights">
+        <p class="eyebrow teal">ECOSYSTEM PULSE</p>
+        <h2>Transparent, practical AI</h2>
+        <p class="lead">The GEMStat-trained Random Forest highlights which measurements most influence its health assessment.</p>
+        <div class="insights-grid">
+          <article class="chart-card"><h3>Feature influence</h3><div id="importance-chart" class="bar-chart"></div></article>
+          <article class="chart-card"><h3>Reference health distribution</h3><div id="distribution" class="distribution"></div></article>
+        </div>
+      </section>
+      <section id="guide">
+        <p class="eyebrow teal">HOW TO READ A CHECK</p>
+        <h2>A clear result, and what to do next</h2>
+        <p class="lead">The model does not look at one number alone. It compares oxygen, temperature, pH, nitrate and phosphorus together, then returns a health signal with confidence.</p>
+        <div id="guide-check" class="test-summary"></div>
+        <div class="guide-grid">
+          <article class="chart-card">
+            <h3>Healthy</h3>
+            <p>The five measurements together look like waters that supported life in the GEMStat record. Keep routine monitoring and share the observation with your group.</p>
+          </article>
+          <article class="chart-card">
+            <h3>At-Risk</h3>
+            <p>The mix of values is closer to stressed sites. Re-sample within 24 hours, look for nearby runoff, and tell local water managers if it persists.</p>
+          </article>
+          <article class="chart-card">
+            <h3>Use it as an early warning</h3>
+            <p>This is a field screen, not a certified lab result. Unusual weather, a dirty probe, or values far from the training range can all change the picture.</p>
+          </article>
+        </div>
+      </section>
+      <section class="action" id="action">
+        <p class="eyebrow">FROM OBSERVATION TO ACTION</p>
+        <h2>Build a healthier water future together.</h2>
+        <div class="steps">
+          <article><b>01</b><h3>Measure</h3><p>Collect a simple field sample with your local kit or sensor.</p></article>
+          <article><b>02</b><h3>Understand</h3><p>Spot emerging risks through a clear AI health signal.</p></article>
+          <article><b>03</b><h3>Respond</h3><p>Share verified concerns with community and water managers.</p></article>
+        </div>
+      </section>
+    </main>
+    <footer>OneAquaHealth · Connecting ecosystem health, biodiversity, and human well-being</footer>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  </body>
+</html>
